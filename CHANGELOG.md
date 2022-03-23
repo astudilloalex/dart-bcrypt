@@ -1,6 +1,10 @@
+## 1.1.3
+
+- Update readme.
+
 ## 1.1.2
 
-- Update readme version dependencie.
+- Update readme version dependencies.
 
 ## 1.1.1
 
