@@ -15,7 +15,7 @@ Hash your passwords with BCrypt algorithm, this is a jBCrypt modified code to wo
 
 ## Features
 
-You can hide your password or any string to maintein system secure.
+Use BCrypt password-hashing function to keep your system secure.
 
 ## Getting started
 

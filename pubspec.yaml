@@ -1,6 +1,6 @@
 name: bcrypt
 description: This package use jBCrypt modified code to work with Dart VM.
-version: 1.1.0
+version: 1.1.1
 repository: https://github.com/astudilloalex/dart-bcrypt
 # homepage: https://www.example.com
 
