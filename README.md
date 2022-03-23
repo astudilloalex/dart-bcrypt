@@ -25,7 +25,7 @@ Only add [bcrypt](https://pub.dev/packages/bcrypt) package to your pubspec.yaml.
 
 ```yaml
 dependencies:
-  bcrypt: ^1.1.0
+  bcrypt: ^1.1.1
 ```
 
 ## Usage
