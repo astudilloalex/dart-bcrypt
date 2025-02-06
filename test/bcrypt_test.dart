@@ -26,6 +26,17 @@ void main() {
         () => BCrypt.hashpw('a' * 73, salt),
         throwsA(isA<ArgumentError>()),
       );
+
+      // Different encoding (UTF-8) will result in different length
+      expect(
+        () => BCrypt.hashpw('ä' * 36, salt),
+        returnsNormally,
+      );
+
+      expect(
+        () => BCrypt.hashpw('${'ä' * 36}a', salt),
+        throwsA(isA<ArgumentError>()),
+      );
     });
   });
 }
