@@ -178,6 +178,14 @@ class BCrypt {
   /// You need the [password] to hash and [salt] to hash you can generate using
   /// [gensalt] function.
   static String hashpw(final String password, final String salt) {
+    if (utf8.encode(password).length > 72) {
+      throw ArgumentError.value(
+        password,
+        'password',
+        'Password is too long (The length should be less than or equal to 72)',
+      );
+    }
+
     final int saltLength = salt.length;
     if (saltLength < 28) {
       throw ArgumentError.value(
