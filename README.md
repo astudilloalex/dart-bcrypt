@@ -10,6 +10,7 @@ For general information about developing packages, see the Dart guide for
 and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
+[![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
 
 Hash your passwords with BCrypt algorithm, this is a jBCrypt modified code to work with Dart.
 
@@ -25,7 +26,7 @@ Only add [bcrypt](https://pub.dev/packages/bcrypt) package to your pubspec.yaml.
 
 ```yaml
 dependencies:
-  bcrypt: ^1.1.3
+  bcrypt: ^1.2.0
 ```
 
 ## Usage

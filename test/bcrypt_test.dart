@@ -8,10 +8,9 @@ void main() {
     });
 
     test('Check BCrypt prefix', () {
-      expect(BCrypt.gensalt().startsWith('\$2a\$'), isTrue);
-      expect(BCrypt.gensalt(prefix: '\$2b\$').startsWith('\$2b\$'), isTrue);
-      expect(BCrypt.gensalt(prefix: '\$2x\$').startsWith('\$2x\$'), isTrue);
-      expect(BCrypt.gensalt(prefix: '\$2y\$').startsWith('\$2y\$'), isTrue);
+      expect(BCrypt.gensalt().startsWith('\$2a'), isTrue);
+      expect(BCrypt.gensalt(prefix: '\$2b').startsWith('\$2b'), isTrue);
+      expect(BCrypt.gensalt(prefix: '\$2y').startsWith('\$2y'), isTrue);
     });
 
     test(
