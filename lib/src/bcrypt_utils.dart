@@ -6,10 +6,7 @@ import 'package:bcrypt/src/constants.dart';
 /// BCrypt utils to hash passwords
 class BCryptUtils {
   /// Define a [BCryptUtils] class.
-  const BCryptUtils({
-    required this.pArray,
-    required this.sArray,
-  });
+  const BCryptUtils({required this.pArray, required this.sArray});
 
   /// Initial contents of key schedule.
   ///
@@ -27,7 +24,7 @@ class BCryptUtils {
   ///
   /// [data] an array containing the two 32-bit half blocks.
   /// [off] the position in the array of the blocks.
-  void _encipher(final Int32List data, final int off) {
+  void _encipher(Int32List data, int off) {
     int n;
     int l = data[off];
     int r = data[off + 1];
@@ -56,7 +53,7 @@ class BCryptUtils {
   ///
   /// [data] salt information.
   /// [key] password information.
-  void _enhancedKeySchedule(final Int8List data, final Int8List key) {
+  void _enhancedKeySchedule(Int8List data, Int8List key) {
     final Int32List keyOffPointer = Int32List(1);
     final Int32List lr = Int32List(2);
     final Int32List dataOffPointer = Int32List(1);
@@ -82,7 +79,7 @@ class BCryptUtils {
   /// Key the Blowfish cipher.
   ///
   /// [key] an array containing the key.
-  void _key(final Int8List key) {
+  void _key(Int8List key) {
     final Int32List keyOffPointer = Int32List(1);
     final Int32List data = Int32List(2);
     for (int i = 0; i < pArray.length; i++) {
@@ -107,10 +104,7 @@ class BCryptUtils {
   ///
   /// Returns a correct and buggy next word of material from [data] as [Int32List]
   /// with length 2.
-  int _streamToWord(
-    final Int8List data,
-    final Int32List offsetPointer,
-  ) {
+  int _streamToWord(Int8List data, Int32List offsetPointer) {
     int word = 0;
     int off = offsetPointer[0];
     for (int i = 0; i < 4; i++) {
@@ -121,11 +115,7 @@ class BCryptUtils {
     return word;
   }
 
-  Int8List cryptRaw(
-    final Int8List password,
-    final Int8List salt,
-    int logRounds,
-  ) {
+  Int8List cryptRaw(Int8List password, Int8List salt, int logRounds) {
     if (logRounds < minLogRounds || logRounds > maxLogRounds) {
       throw ArgumentError.value(
         logRounds,
@@ -134,11 +124,7 @@ class BCryptUtils {
       );
     }
     if (salt.length != saltLength) {
-      throw ArgumentError.value(
-        salt,
-        'salt',
-        'Bad salt length',
-      );
+      throw ArgumentError.value(salt, 'salt', 'Bad salt length');
     }
     _enhancedKeySchedule(salt, password);
     final int rounds = 1 << logRounds;

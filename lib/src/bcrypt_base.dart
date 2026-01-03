@@ -31,7 +31,7 @@ class BCrypt {
   /// conversion table.
   ///
   /// [char] the base64-encoded value.
-  static int _char64(final String char) {
+  static int _char64(String char) {
     final int charCode = char.codeUnitAt(0);
     final Int8List index64 = BCryptArrays.base64Decoding;
     if (charCode < 0 || charCode >= index64.length) {
@@ -43,7 +43,7 @@ class BCrypt {
   /// Check that a [text] password matches a previously [hashed] one.
   ///
   /// Returns true if the passwords match, false otherwise.
-  static bool checkpw(final String text, final String hashed) {
+  static bool checkpw(String text, String hashed) {
     return hashed.compareTo(hashpw(text, hashed)) == 0;
   }
 
@@ -51,7 +51,7 @@ class BCrypt {
   /// the [maxLength] number of bytes to decode.
   ///
   /// Note that this is not compatible with the standard MIME-base64 encoding.
-  static Int8List decodeBase64(final String data, final int maxLength) {
+  static Int8List decodeBase64(String data, int maxLength) {
     if (maxLength <= 0) {
       throw ArgumentError.value(maxLength, 'maxLength', 'Invalid max length');
     }
@@ -94,7 +94,7 @@ class BCrypt {
 
   /// Encode [data] using bcrypt's slightly-modified base64 encoding scheme with
   /// the [length] of bytes to encode.
-  static String encodeBase64(final Int8List data, final int length) {
+  static String encodeBase64(Int8List data, int length) {
     if (length <= 0 || length > data.length) {
       throw ArgumentError.value(length, 'length', 'Invalid length');
     }
@@ -131,9 +131,9 @@ class BCrypt {
   /// Use [prefix] value to generate salt (default '$2a$'),
   /// The Log2 [logRounds] of the number of rounds of hashing to apply.
   static String gensalt({
-    final String prefix = '\$2a',
-    final int logRounds = constants.saltDefaultLogRounds,
-    final Random? secureRandom,
+    String prefix = '\$2a',
+    int logRounds = constants.saltDefaultLogRounds,
+    Random? secureRandom,
   }) {
     if (logRounds < constants.minLogRounds ||
         logRounds > constants.maxLogRounds) {
@@ -177,7 +177,7 @@ class BCrypt {
   ///
   /// You need the [password] to hash and [salt] to hash you can generate using
   /// [gensalt] function.
-  static String hashpw(final String password, final String salt) {
+  static String hashpw(String password, String salt) {
     if (utf8.encode(password).length > 72) {
       throw ArgumentError.value(
         password,
@@ -195,11 +195,7 @@ class BCrypt {
       );
     }
     if (salt[0] != '\$' || salt[1] != '2') {
-      throw ArgumentError.value(
-        salt,
-        'salt',
-        'Invalid salt version',
-      );
+      throw ArgumentError.value(salt, 'salt', 'Invalid salt version');
     }
     final int off;
     final String minor;
@@ -209,28 +205,16 @@ class BCrypt {
     } else {
       minor = salt[2];
       if ((minor != 'a' && minor != 'b' && minor != 'y') || salt[3] != '\$') {
-        throw ArgumentError.value(
-          salt,
-          'salt',
-          'Invalid salt revision',
-        );
+        throw ArgumentError.value(salt, 'salt', 'Invalid salt revision');
       }
       off = 4;
     }
     // Extract number of rounds
     if (salt[off + 2].codeUnitAt(0) > '\$'.codeUnitAt(0)) {
-      throw ArgumentError.value(
-        salt,
-        'salt',
-        'Missing salt rounds',
-      );
+      throw ArgumentError.value(salt, 'salt', 'Missing salt rounds');
     }
     if (off == 4 && saltLength < 29) {
-      throw ArgumentError.value(
-        salt,
-        'salt',
-        'Invalid salt',
-      );
+      throw ArgumentError.value(salt, 'salt', 'Invalid salt');
     }
     final int rounds = int.parse(salt.substring(off, off + 2));
     final StringBuffer stringBuffer = StringBuffer();

@@ -1,7 +1,7 @@
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library bcrypt;
+library;
 
 export 'src/bcrypt_base.dart';
 
